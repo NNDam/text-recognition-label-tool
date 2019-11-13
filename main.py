@@ -1,18 +1,21 @@
 import os
-import cv2
 import glob
 import sys
 import argparse
 
 
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QGridLayout, QProgressBar, QLineEdit
-from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QGridLayout, QProgressBar, QLineEdit, QAction
+#from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5 import QtCore
+
 
 class App(QWidget):
 
 	def __init__(self, image_folder):
 		super().__init__()
-		self.title = 'Text recognition LABELER'
+		self.title = 'Text Recognition LABELER'
 		self.left = 50
 		self.top = 50
 		self.width = 800
@@ -107,6 +110,10 @@ class App(QWidget):
 		self.layout.addWidget(self.progress, 2, 0, 1, 5)
 		self.layout.addWidget(self.previous_button, 2, 5, 1, 1)
 		
+		# Add Keypress Event
+		self.setEnterAction=QAction("Set Enter", self, shortcut=Qt.Key_Return, triggered=self.press_next)
+		self.addAction(self.setEnterAction)
+		self.layout.addWidget(QPushButton("Enter", self, clicked=self.setEnterAction.triggered))
 
 		self.setLayout(self.layout)
 		self.show()
