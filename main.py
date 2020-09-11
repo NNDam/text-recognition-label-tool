@@ -62,8 +62,9 @@ class App(QWidget):
 	def update(self):
 		# Update image
 		pixmap = QPixmap(self.list_file[self.current_index])
-		self.label.setPixmap(pixmap)
 		width, height = self.get_size(pixmap.width(),pixmap.height())
+		self.label.setPixmap(pixmap.scaled(width, height))
+
 		self.label.resize(width, height)
 		self.update_text()
 	
@@ -86,10 +87,10 @@ class App(QWidget):
 		# Put image
 		self.label = QLabel()
 		pixmap = QPixmap(self.list_file[self.current_index])
-		self.label.setPixmap(pixmap)
 		width, height = self.get_size(pixmap.width(),pixmap.height())
+		self.label.setPixmap(pixmap.scaled(width, height))
 		self.label.resize(width, height)
-		#self.update()
+
 
 		# Text box
 		self.textbox = QLineEdit()
